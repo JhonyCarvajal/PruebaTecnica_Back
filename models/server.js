@@ -11,7 +11,7 @@ class Server {
         //PATHS
         this.paths = {
            /* auth: '/api/auth',*/
-            //users: '/api/users',     
+            imagen: '/api/imagen',     
         }
         //Conectar a BD-
       //  this.conectarDB();
@@ -49,7 +49,7 @@ class Server {
 
     routes() {
        
-       // this.app.use(this.paths.users, require('../routes/users'))
+        this.app.use(this.paths.imagen, require('../routes/imagen'))
     }
 
 
