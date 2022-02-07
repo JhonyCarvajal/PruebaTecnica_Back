@@ -12,7 +12,16 @@ const imagesGet = (req=  request,res=  response )=>{
 
 const imagePost = async (req= request, res= response )=>{
 
-    try {
+    console.log(req.file)
+
+    //console.log(req)
+   // console.log("ingreso")
+    res.json({ 
+      //  req,
+        msg: `Hola mundo desde ImagePOst`
+    })
+
+    /*try {
         
         const imagen = req.file
         const imageResized= await sharp(imagen.buffer).resize(796, 1123,{
@@ -31,7 +40,7 @@ const imagePost = async (req= request, res= response )=>{
     } catch (error) {
         
     }
-   
+   */
 
 
 }

@@ -19,8 +19,8 @@ const router = Router();
 
 router.get('/AllImages',imagesGet )
 
-router.post('/images',[
-    upload.single('imagen'),
+router.post('/images' ,[
+  upload.single('imagen'),
     validarCampos
 ],imagePost
 )
