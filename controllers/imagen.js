@@ -12,35 +12,29 @@ const imagesGet = (req=  request,res=  response )=>{
 
 const imagePost = async (req= request, res= response )=>{
 
-    console.log(req.file)
-
-    //console.log(req)
-   // console.log("ingreso")
-    res.json({ 
-      //  req,
-        msg: `Hola mundo desde ImagePOst`
-    })
-
-    /*try {
-        
+    try {
         const imagen = req.file
-        const imageResized= await sharp(imagen.buffer).resize(796, 1123,{
-            fit: 'contain',
-            background: "#fff"
-        }).toBuffer()
+       // console.log(imagen)
+        const imageResized= await sharp(imagen.buffer)
+                .resize(796, 1123,{
+                     fit: 'contain',
+                     background: "#fff"
+                }).toBuffer()
 
 
-        fs.writeFileSync('uploads/prueba.png', imageResized)
-        
-        console.log(imageResized);
+        fs.writeFileSync(`uploads/${imagen.originalname}`, imageResized)
         res.json({ 
+            status: 200,
             imageResized,
             msg: `Hola mundo desde ImagePOst`
         })
     } catch (error) {
-        
+        res.json({ 
+            status: 400,
+            msg: `Error ${error}`
+        })
     }
-   */
+   
 
 
 }
