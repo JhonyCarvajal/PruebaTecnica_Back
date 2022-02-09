@@ -4,10 +4,9 @@ const sharp = require('sharp');
 var cloudinary = require('cloudinary').v2
 cloudinary.config( process.env.CLOUDINARY_URL)
 
+const Imagene = require('../models/imagene');
+const { Op, and } = require("sequelize");
 const fs = require('fs')
-
-//const {UploadImageCloud} = require ("../helpers/uploadImage")
-
 
 
 const imagesGet = (req=  request,res=  response )=>{
@@ -16,6 +15,7 @@ const imagesGet = (req=  request,res=  response )=>{
 }
 
 const imagePost = async (req= request, res= response )=>{
+   
     try {
         const imagen = req.file
       
@@ -27,11 +27,22 @@ const imagePost = async (req= request, res= response )=>{
         await fs.writeFileSync(`uploads/${imagen.originalname}`, imageResized)
 
         const {secure_url} = await cloudinary.uploader.upload(`uploads/${imagen.originalname}`)
-        
+
+        const url = secure_url
+        const ImagenAgregada = await Imagene.findOrCreate({
+            where: {
+                [Op.or]: [
+                    {url}
+                ]
+            },
+            defaults: {
+                url
+            }
+        })
         res.json({ 
-            status: 200,
-            data: secure_url,
-            msg: `Hola mundo desde ImagePOst`
+            status: 201,
+            data: url,
+            msg: `Imagen Agregada`
         })
     } catch (error) {
         res.json({ 
