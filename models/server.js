@@ -1,8 +1,8 @@
 const express = require('express')
 const cors = require('cors');
+const db = require('../database/conection');
 
 
-//const db = require('../database/conection');
 
 
 class Server {
@@ -12,11 +12,12 @@ class Server {
        
         //PATHS
         this.paths = {
-           /* auth: '/api/auth',*/
-            imagen: '/api/imagen',     
+            auth: '/api/auth',
+            imagen: '/api/imagen',
+            users: '/api/users',     
         }
         //Conectar a BD-
-      //  this.conectarDB();
+        this.conectarDB();
 
         //Middlewares --> funcion que siempre se ejecuta
         this.middlewares();
@@ -51,7 +52,9 @@ class Server {
 
     routes() {
        
+        this.app.use(this.paths.auth, require('../routes/auth'))
         this.app.use(this.paths.imagen, require('../routes/imagen'))
+        this.app.use(this.paths.users, require('../routes/users'))
     }
 
 

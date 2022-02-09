@@ -24,17 +24,10 @@ const imagePost = async (req= request, res= response )=>{
                      fit: 'contain',
                      background: "#fff"
                 }).toBuffer()
-
-
-
         await fs.writeFileSync(`uploads/${imagen.originalname}`, imageResized)
 
         const {secure_url} = await cloudinary.uploader.upload(`uploads/${imagen.originalname}`)
-
-        console.log(secure_url)
         
-        //console.log(imgFolder)*/
-
         res.json({ 
             status: 200,
             data: secure_url,
