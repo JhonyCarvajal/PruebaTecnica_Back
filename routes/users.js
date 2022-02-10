@@ -4,6 +4,7 @@ const { check } = require('express-validator');
 
 
 const { validarCampos } = require('../middlewares/validar-campos');
+const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
 
@@ -13,6 +14,7 @@ const {
 
 router.post('/',
   [
+    validarJWT,
     check('name', 'El nombre es Obligatorio').not().isEmpty().trim(),
     check('email', 'El correo no es valido').isEmail().trim(),
     check('password').isLength({ min: 8 }).withMessage('La contraseña debe contener minimo 8 carcateres').
