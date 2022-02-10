@@ -77,8 +77,18 @@ const login = async (req, res = response) => {
     }
 }
 
+const  Authenticated = async(req, res = response)=>{
+
+    res.status(201).json({
+        msg: `Autenticado con token Valido`
+    })
+        
+    console.log('Ingresor')
+
+}
 
 module.exports = {
-    login
+    login,
+    Authenticated
 
 }
