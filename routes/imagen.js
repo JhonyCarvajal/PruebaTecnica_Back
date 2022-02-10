@@ -12,6 +12,7 @@ const storageMulter = multer.memoryStorage()
 const upload = multer({ storage: storageMulter })
   
 const { validarCampos } = require('../middlewares/validar-campos');
+const { validarJWT } = require('../middlewares/validar-jwt.js');
 
 
 const router = Router();
@@ -20,6 +21,7 @@ const router = Router();
 router.get('/AllImages',imagesGet )
 
 router.post('/images' ,[
+  validarJWT,
   upload.single('imagen'),
     validarCampos
 ],imagePost
